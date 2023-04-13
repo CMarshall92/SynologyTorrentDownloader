@@ -57,7 +57,7 @@ const openDownloadStation = async (page) => {
 }
 
 const addTorrent = async (page) => {
-  const addDownloadIcon = "button[aria-label*='download task']";
+  const addDownloadIcon = "button[aria-label='Create download task via file upload']";
   await page.waitForSelector(addDownloadIcon);
   await page.click(addDownloadIcon);
 }
