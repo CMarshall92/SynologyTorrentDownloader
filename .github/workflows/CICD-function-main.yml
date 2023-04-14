@@ -1,0 +1,60 @@
+name: CI/CD - @synologytorrentdownloader/function
+
+on:
+  push:
+    paths:
+      - "./function/**"
+    branches:
+      - "main"
+
+jobs:
+  Deploy:
+    needs: [Install_Dependencies_And_Cache]
+    runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
+      REGION: us-east1
+      REPO_NAME: synologytorrentdownloader-api-express-app
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}
+
+      - name: Setup Google SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Authorize Docker Push
+        run: gcloud auth configure-docker
+
+      - name: Build & Tag Docker Image
+        run: docker build . --tag gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+
+      - name: Push Image To GCR
+        run: docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+
+      - name: Deploy
+        run: |-
+          gcloud run deploy $REPO_NAME \
+          --region $REGION \
+          --image gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
+          --platform "managed" \
+          --quiet \
+          --allow-unauthenticated \
+          --set-env-vars "QUICK_CONNECT_ID=${{ secrets.ENV_QUICK_CONNECT_ID }}" \
+          --set-env-vars "SYNOLOGY_USERNAME=${{ secrets.ENV_SYNOLOGY_USERNAME }}" \
+          --set-env-vars "SYNOLOGY_PASSWORD=${{ secrets.ENV_SYNOLOGY_PASSWORD }}" \
+          --set-env-vars "MONGO_DB_USER=${{ secrets.ENV_MONGO_DB_USER }}" \
+          --set-env-vars "MONGO_DB_PASSWORD=${{ secrets.ENV_MONGO_DB_PASSWORD }}" \
+          --set-env-vars "MONGO_DB_HOST=${{ secrets.ENV_MONGO_DB_HOST }}"
+
+      - name: Delete GCR Image
+        if: always()
+        run: |-
+          gcloud container images delete gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
+          --force-delete-tags \
+          --quiet
