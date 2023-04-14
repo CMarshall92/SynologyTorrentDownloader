@@ -31,7 +31,7 @@ jobs:
         run: gcloud auth configure-docker
 
       - name: Build & Tag Docker Image
-        run: docker build . --tag gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+        run: docker build ./function --tag gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
 
       - name: Push Image To GCR
         run: docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
