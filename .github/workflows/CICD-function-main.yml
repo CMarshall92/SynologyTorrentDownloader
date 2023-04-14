@@ -3,7 +3,7 @@ name: CI/CD - @synologytorrentdownloader/function
 on:
   push:
     paths:
-      - "./function/**"
+      - "function/**"
     branches:
       - "main"
 

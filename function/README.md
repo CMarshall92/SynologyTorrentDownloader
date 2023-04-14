@@ -1,4 +1,4 @@
-# SynologyTorrentDownloader
+# Synology Torrent Downloader
 
 This is a simple cloud function that makes use of a headless web scraper `puppeteer` to log into a synology diskstation and add new `magnet links` to `Download Station`.
 
