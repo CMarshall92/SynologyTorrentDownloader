@@ -9,7 +9,6 @@ on:
 
 jobs:
   Deploy:
-    needs: [Install_Dependencies_And_Cache]
     runs-on: ubuntu-latest
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
