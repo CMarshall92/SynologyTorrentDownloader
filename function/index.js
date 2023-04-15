@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 app.use(express.json());
+app.use(require('./lib/corsConfiguration'));
 
 var { expressjwt: jwt } = require("express-jwt");
 const secret = process.env.AUTH_SECRET ?? "SecretWhenUndefinedThatsSecure29393993938228374983838";

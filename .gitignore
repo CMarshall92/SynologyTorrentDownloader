@@ -1,4 +1,35 @@
+# Global
 node_modules
 .env
 .DS_Store
+dist/
+web-build/
 synology-383714-c4e386ae7e62.json
+.eslintcache
+coverage
+logs
+
+# React Native Ignore
+.expo/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+.metro-health-check*
+
+# Desktop App Ignore
+*.log
+pids
+*.pid
+*.seed
+release/app/dist
+release/build
+.erb/dll
+.idea
+npm-debug.log.*
+*.css.d.ts
+*.sass.d.ts
+*.scss.d.ts

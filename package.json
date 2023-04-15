@@ -1,0 +1,19 @@
+{
+  "name": "synologytorrentdownloader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:CMarshall92/SynologyTorrentDownloader.git",
+  "author": "Chris Marshall <95001251+ShotgunTortoise@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "install:all": "concurrently \"cd function && yarn install\" \"cd clients/desktop && yarn install\" \"cd clients/mobile && yarn install\"",
+    "start:backend": "concurrently \"cd function && yarn dev\" \"emulator @Samsung_S22_Ultra_-_API_33\"",
+    "start:all": "concurrently \"yarn start:desktop\" \"yarn start:android\"",
+    "start:desktop": "cd clients/desktop && yarn start",
+    "start:android": "cd clients/mobile && yarn android",
+    "start:ios": "cd clients/mobile && yarn ios"
+  },
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
