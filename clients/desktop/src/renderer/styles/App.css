@@ -1,0 +1,22 @@
+
+body {
+  position: relative;
+  color: white;
+  height: 100vh;
+  background: white;
+  font-family: sans-serif;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+p, h1, h2, h3, h4, h5, h6, small {
+  color: black;
+}
+
+li {
+  list-style: none;
+}
