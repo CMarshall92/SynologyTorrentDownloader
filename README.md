@@ -17,7 +17,12 @@ yarn install && yarn install:all
 Once complete you will be able to follow the sections below to start up the projects you would like to develop.
 
 # Desktop Client
-[![](https://markdown-videos.deta.dev/youtube/etta_CrPnmQ)](https://youtu.be/etta_CrPnmQ)
+<figure class="embed-block">
+	<iframe src="https://www.youtube.com/embed/etta_CrPnmQ" width="800" height="300" ></iframe>
+</figure>
+
+
+<!-- [![](https://markdown-videos.deta.dev/youtube/etta_CrPnmQ)](https://youtu.be/etta_CrPnmQ) -->
 
 ### Run Desktop Environment
 
